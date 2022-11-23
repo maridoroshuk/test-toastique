@@ -6,24 +6,30 @@ import { toast, ToastList } from 'toastique-toast'
 
 function App() {
   const [toasts, setToasts] = useState([])
-  const [properties, setProperties] = useState({});
 
-  const handleShowToast = () => {
-    setToasts(toast.getToasts('info', {
+  const handleShowTopRightToast = () => {
+    toast.addToast('info', {
       heading: "Wow",
-      content: "I'm an info toast!"
-    }))
-
-    setProperties({
-      position: "top-right",
-      autoCloseTime: 3000
+      content: "I'm an info toast!",
+      position: "top-right"
     })
+    setToasts(toast.getToasts())
+  }
+
+  const handleShowBottomLeftToast = () => {
+    toast.addToast('success', {
+      heading: "Wow",
+      content: "I'm an success toast!",
+      position: "bottom-left"
+    })
+    setToasts(toast.getToasts())
   }
 
   return (
     <div className='App'>
-      <button type='button' onClick={handleShowToast}>Show</button>
-      {toasts.length > 0 && <ToastList toast={toast} toastList={toasts} properties={properties}/>}
+      <button type='button' onClick={handleShowTopRightToast}>Show top-rigth toasts</button>
+      <button type='button' onClick={handleShowBottomLeftToast}>Show bottom-left toasts</button>
+      {toasts.length > 0 && <ToastList toast={toast} toastList={toasts} />}
     </div>
   );
 }
